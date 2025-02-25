@@ -1,5 +1,7 @@
 azure-ai-projects
 azure-identity
 dotenv
+autogen
+
 
 # az login --tenant 19d60073-5b9e-4ad1-9436-62050bdbe966
