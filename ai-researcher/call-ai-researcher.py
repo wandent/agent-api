@@ -64,9 +64,7 @@ if __name__ == "__main__":
                 thread = create_thread(project_client)
                 continue
             message = create_message(project_client, prompt=user_input)
-            #print(f"Created message, message ID: {message.id}")
             run = project_client.agents.create_and_process_run(thread_id=thread.id, assistant_id=agent.id)
-            #print(f"Run finished with status: {run.status}")
 
             if run.status == "failed":
                 # Check if you got "Rate limit is exceeded.", then you want to get more quota

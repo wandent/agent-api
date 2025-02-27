@@ -1,0 +1,7 @@
+ [{"model": "gpt-4o",
+                "api_key": "f1938e5239d347499230579cf3ff0b41",
+                "base_url": "https://aihubdemonorth8351247631.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2024-08-01-preview"}
+                ]
+
