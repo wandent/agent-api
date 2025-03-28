@@ -30,7 +30,7 @@ client = AzureAIAgent.create_client(credential=creds, conn_str=os.getenv("AZURE_
 
 async def load_agent():
     # 1. Define an agent on the Azure AI agent service
-    agent_definition = await client.agents.get_agent("asst_LjxpI1jOelbbnFQvU7vxpXbk")
+    agent_definition = await client.agents.get_agent(os.getenv("AI_ASSISTANT_RESEARCHER"))
     # 2. Create a Semantic Kernel agent based on the agent definition
    
     agent = AzureAIAgent(client=client,
@@ -54,7 +54,10 @@ async def main():
         while True:
             user_input = input("You: ")
             if user_input.lower() == "exit":
-                break
+                    await thread.delete() if thread else None
+                    await client.close()
+                    print("Goodbye!")
+                    break
             # Invoke the agent with the user input
             async for content in agent.invoke(messages=user_input, thread=thread):
                 print(f"AI: {content.content}")
