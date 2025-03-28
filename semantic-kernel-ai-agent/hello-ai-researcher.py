@@ -22,31 +22,43 @@ from semantic_kernel import Kernel
 from semantic_kernel.agents import AzureAIAgent, AzureAIAgentThread
 from dotenv import load_dotenv, find_dotenv
 
-async def main():
-    load_dotenv(find_dotenv())  # Load environment variables from .env file
-    creds = DefaultAzureCredential()
-    #client = AIProjectClient(credential=creds, endpoint=os.getenv("AZURE_AI_AGENT_PROJECT_CONNECTION_STRING"),  project_name=os.getenv("AZURE_AI_AGENT_PROJECT_NAME"), subscription_id=os.getenv("AZURE_AI_AGENT_SUBSCRIPTION_ID"), resource_group_name=os.getenv("AZURE_AI_AGENT_RESOURCE_GROUP_NAME"),)
-    client = AIProjectClient.from_connection_string(os.getenv("AZURE_AI_AGENT_PROJECT_CONNECTION_STRING"), credential=creds)
+load_dotenv(find_dotenv())  # Load environment variables from .env file
+kernel = Kernel()
+creds = DefaultAzureCredential()
+client = AzureAIAgent.create_client(credential=creds, conn_str=os.getenv("AZURE_AI_AGENT_PROJECT_CONNECTION_STRING"))
+
+
+async def load_agent():
     # 1. Define an agent on the Azure AI agent service
-    agent_definition =  client.agents.get_agent("asst_imwZWQebLCDze69a7s8A1G65")
-    print(agent_definition.id)
+    agent_definition = await client.agents.get_agent("asst_LjxpI1jOelbbnFQvU7vxpXbk")
     # 2. Create a Semantic Kernel agent based on the agent definition
    
-    agent = await AzureAIAgent(client=client, definition=agent_definition)
-       
+    agent = AzureAIAgent(client=client,
+                        definition=agent_definition)
     
+    # user_inputs = ["Hello", "Look for AI papers related to watermarking techniques in text generation?"]
 
-    user_inputs = ["Hello", "Look for AI papers related to watermarking techniques in text generation?"]
+    return agent
 
+async def load_thread():
     thread: AzureAIAgentThread = AzureAIAgentThread(client=client)
     thread = AzureAIAgentThread(client=client)
+    return thread 
+
+async def main():
     try:
-        for user_input in user_inputs:
-            response =  agent.get_response(messages=user_input, thread=thread)
-            print(f"User: {user_input}")
-            print(f"AI: {response.content}")
-            # print(response)
-            thread = response.thread
+       # request the user input in loop until the user types "exit"
+        agent = await load_agent()
+        thread = await load_thread()
+        print("Hello, I am your AI assistant. Type 'exit' to end the conversation.")
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "exit":
+                break
+            # Invoke the agent with the user input
+            async for content in agent.invoke(messages=user_input, thread=thread):
+                print(f"AI: {content.content}")
+                thread = content.thread
     finally:
         await thread.delete() if thread else None
 
