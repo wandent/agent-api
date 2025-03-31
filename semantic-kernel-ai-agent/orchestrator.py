@@ -27,10 +27,8 @@ async def load_thread():
     thread = AzureAIAgentThread(client=client)
     return thread 
 
-
-
 # Create a function to load the agent-manifest.json and ask chatgpt which agent to use
-async def load_agent_from_manifest(thread,  manifest_path, input_text):
+async def orchestrator(thread,  manifest_path, input_text):
     with open(manifest_path, 'r') as file:
         manifest = file.read()
         # convert manifest from json document into a string
@@ -62,7 +60,7 @@ async def main():
             # if it's the first iteration, load the agent and thread
             if agent_id == "":
                 thread = await load_thread()
-                agent_id = await load_agent_from_manifest(thread, "./agents/agents-manifest.json", user_input)
+                agent_id = await orchestrator(thread, "./agents/agents-manifest.json", user_input)
                 print(f"New thread: {thread.id}")
                 print(f"Selected agent: {agent_id}")
             if user_input.lower() == "exit":
