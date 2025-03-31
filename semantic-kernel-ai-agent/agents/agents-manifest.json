@@ -1,0 +1,40 @@
+{"agents":
+    [
+        {"agent_id": "asst_imwZWQebLCDze69a7s8A1G65", 
+        "agent-name": "PromptEngineer",
+        "agent-description": "This agent is designed to help you create and refine prompts for AI models. It can assist you in generating effective prompts, improving existing ones, and providing suggestions for better results.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "I''d like to create a new prompt"
+        },
+        {
+            "utterance": "Help me to craft a prompt."
+        },
+        {
+            "utterance": "Help me to resolve a complex problem with a prompt"
+        }
+            ]  
+
+        },
+        {"agent_id": "asst_LjxpI1jOelbbnFQvU7vxpXbk",
+        "agent-name": "AIresearcher",
+        "agent-description": "This agent is designed to help the user to research AI papers and summarize them.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "I'd like to know about the following topic in AI:"
+        },
+        {
+            "utterance": "Help me researching AI Papers about the following subject: "
+        },
+        {
+            "utterance": "Help me to summarize the ai paper related to the folowing subject: "
+        }
+        ] 
+    
+        }
+       
+    ]
+        
+}
