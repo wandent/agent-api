@@ -13,7 +13,7 @@ load_dotenv(find_dotenv())  # Load environment variables from .env file
 kernel = Kernel()
 creds = DefaultAzureCredential()
 client = AzureAIAgent.create_client(credential=creds, conn_str=os.getenv("AZURE_AI_AGENT_PROJECT_CONNECTION_STRING"))
-
+thread = None
 
 async def load_agent(agent_id):
     agent_definition = await client.agents.get_agent(agent_id)
@@ -23,9 +23,9 @@ async def load_agent(agent_id):
 
 
 async def load_thread():
-    thread: AzureAIAgentThread = AzureAIAgentThread(client=client)
-    thread = AzureAIAgentThread(client=client)
-    return thread 
+     thread: AzureAIAgentThread = AzureAIAgentThread(client=client)
+     thread = AzureAIAgentThread(client=client)
+     return thread 
 
 # Create a function to load the agent-manifest.json and ask chatgpt which agent to use
 async def orchestrator(thread,  manifest_path, input_text):
@@ -42,11 +42,10 @@ async def orchestrator(thread,  manifest_path, input_text):
         agent = AzureAIAgent(client=client,
                         definition=generic_agent)
         async for content in agent.invoke(messages=prompt, thread=thread):
-                print(f"AI: {content.content}")
-                thread = content.thread
+            response =content.content
+            thread = content.thread
    
     
-    response =content.content
     return response
 
 async def main():
@@ -64,29 +63,40 @@ async def main():
                 print(f"New thread: {thread.id}")
                 print(f"Selected agent: {agent_id}")
             if user_input.lower() == "exit":
-                    #await thread.delete() if thread else None
+                    await thread.delete() if thread else None
                     await client.close()
                     print("Goodbye!")
                     break
            
             # close the thread if the user types "new chat"
             elif user_input.lower() == "new chat":
-                thread = await exit
-                load_thread()
+                await thread.delete() if thread else None
                 agent_id = ""
                 print("New chat started.")
                 continue
             else:
+                try:
                 # load the agent based on the agent_id
-                agent = await load_agent(agent_id)
-                async for content in agent.invoke(messages=user_input, thread=thread):
-                    print(f"AI: {content.content}")
-                    thread = content.thread
-            
-           
+                    agent = await load_agent(agent_id)
+                    async for content in agent.invoke(messages=[user_input], thread=thread, max_completion_tokens=4096):
+                            print(f"AI: {content.content}")
+                            thread = content.thread
+                        
+                
+                # report the error
+                except Exception as e:
+                    #print(f"Error: {e}")
+                    print("Error in the request, my responses are limited. Please try again.")
+                    # diplay the thread content for debugging purposes
+                    #async for content in thread.get_messages(sort_order="desc"):
+                    #    print(f"Thread message: {content.content}")
+                    continue
+                finally:
+                    pass
+      
     finally:
         await client.close()
-        #await thread.delete() if thread else None
+        await thread.delete() if thread else None
 
 
 # call the main function

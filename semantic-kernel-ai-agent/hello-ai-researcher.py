@@ -40,16 +40,17 @@ async def load_agent():
 
     return agent
 
-async def load_thread():
-    thread: AzureAIAgentThread = AzureAIAgentThread(client=client)
-    thread = AzureAIAgentThread(client=client)
-    return thread 
+# async def load_thread():
+#     thread: AzureAIAgentThread = AzureAIAgentThread(client=client)
+#     thread = AzureAIAgentThread(client=client)
+#     return thread 
 
 async def main():
     try:
        # request the user input in loop until the user types "exit"
         agent = await load_agent()
-        thread = await load_thread()
+        #thread = await load_thread()
+        thread = None
         print("Hello, I am your AI assistant. Type 'exit' to end the conversation.")
         while True:
             user_input = input("You: ")

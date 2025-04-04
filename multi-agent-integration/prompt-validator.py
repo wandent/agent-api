@@ -1,5 +1,7 @@
 import os
 import io
+import asyncio
+
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import CodeInterpreterTool
 from azure.identity import DefaultAzureCredential
@@ -80,16 +82,7 @@ if __name__ == "__main__":
     main()
 
 
-
-
-
-            
-
-
-
-
 # call the main function async
 if __name__ == "__main__":
-    import asyncio
     asyncio.run(main())
 
