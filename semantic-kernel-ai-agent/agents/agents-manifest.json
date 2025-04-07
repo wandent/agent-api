@@ -33,7 +33,24 @@
         }
         ] 
     
+        }, 
+        {"agent_id": "asst_rYEZZ8EHgoNtsjdZWXS9sBKb",
+        "agent-name": "WeatherAgent",
+        "agent-description": "This agent is designed to help the user to ask for the weather forecast on a specific region or set of regions.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "how is the weather in the following region: "
+        },
+        {
+            "utterance": "what is the weather forecast in the region: "
+        },
+        {
+            "utterance":  "tell me about the weather in the following region: "
         }
+        ] 
+    
+        } 
        
     ]
         
