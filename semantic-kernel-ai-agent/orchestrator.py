@@ -38,7 +38,7 @@ async def orchestrator(thread,  manifest_path, input_text):
         prompt = f"Please choose an agent from the following manifest:\n{manifest}\n\nWhich agent would you like to use in order that meet the following input text: {input_text}. You should choose the agent based on the input text closeness with the utterances depicted on the manifest.\n\n Return just the information on the agent_id field." 
         # Here you would call your AI model to get the response
         # For example, using OpenAI's API or any other AI service
-        generic_agent = await client.agents.get_agent("asst_rYEZZ8EHgoNtsjdZWXS9sBKb")
+        generic_agent = await client.agents.get_agent("asst_5jWDJeBffbsPO7VGUiuXYuY3")
         agent = AzureAIAgent(client=client,
                         definition=generic_agent)
         async for content in agent.invoke(messages=prompt, thread=thread):
