@@ -35,9 +35,36 @@ async def orchestrator(thread,  manifest_path, input_text):
         manifest = json.dumps(json.loads(manifest), indent=4)
 
 
+        # if the request directs to a specific agent, then return the agent_id of the agent
+        # check if the name of the agent is mentioned in the prompt preceded by "@", like @waether or @researcher or @prompt-engineer
+        # if the name is mentioned, then return the agent_id of the agent
+        if "@" in input_text:
+            agent_name = input_text.split("@")[1].split(" ")[0]
+            # iterate over the manifest records and check if the agent_name is in the manifest, return the agent_id of the agent
+            manifest_data = json.loads(manifest)
+            agents = manifest_data.get('agents', [])
+
+        # Search for the agent in the manifest
+            for agent in agents:
+                if agent['agent-name'] == agent_name:
+                    print(f"Agent ID: {agent['agent_id']}")
+                    return agent['agent_id']
+                    
+
+            
+            
+            # Removed the redundant check for agent_name in manifest_data
+            # if agent_name in manifest_data:
+            #     # get the agent_id from the manifest
+            #     agent_id = json.loads(manifest)[agent_name]["agent_id"]
+            #     print(f"Agent name: {agent_name}")
+            #     print(f"Agent id: {agent_id}")
+            #     # create a new thread with the agent_id
+            #     thread = AzureAIAgentThread(client=client)
+            #     return agent_id
+
+
         prompt = f"Please choose an agent from the following manifest:\n{manifest}\n\nWhich agent would you like to use in order that meet the following input text: {input_text}. You should choose the agent based on the input text closeness with the utterances depicted on the manifest.\n\n Return just the information on the agent_id field." 
-        # Here you would call your AI model to get the response
-        # For example, using OpenAI's API or any other AI service
         generic_agent = await client.agents.get_agent("asst_5jWDJeBffbsPO7VGUiuXYuY3")
         agent = AzureAIAgent(client=client,
                         definition=generic_agent)
@@ -69,7 +96,7 @@ async def main():
                     break
            
             # close the thread if the user types "new chat"
-            elif user_input.lower() == "new chat":
+            if user_input.lower() == "new chat":
                 await thread.delete() if thread else None
                 agent_id = ""
                 print("New chat started.")

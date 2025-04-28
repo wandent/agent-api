@@ -1,7 +1,7 @@
 {"agents":
     [
         {"agent_id": "asst_imwZWQebLCDze69a7s8A1G65", 
-        "agent-name": "PromptEngineer",
+        "agent-name": "prompt-engineer",
         "agent-description": "This agent is designed to help you create and refine prompts for AI models. It can assist you in generating effective prompts, improving existing ones, and providing suggestions for better results.",
         "agent-version": "0.0.1",
         "utterances": [
@@ -18,7 +18,7 @@
 
         },
         {"agent_id": "asst_LjxpI1jOelbbnFQvU7vxpXbk",
-        "agent-name": "AIresearcher",
+        "agent-name": "researcher",
         "agent-description": "This agent is designed to help the user to research AI papers and summarize them.",
         "agent-version": "0.0.1",
         "utterances": [
@@ -35,7 +35,7 @@
     
         }, 
         {"agent_id": "asst_rYEZZ8EHgoNtsjdZWXS9sBKb",
-        "agent-name": "WeatherAgent",
+        "agent-name": "weather",
         "agent-description": "This agent is designed to help the user to ask for the weather forecast on a specific region or set of regions.",
         "agent-version": "0.0.1",
         "utterances": [
