@@ -51,18 +51,6 @@ async def orchestrator(thread,  manifest_path, input_text):
                     return agent['agent_id']
                     
 
-            
-            
-            # Removed the redundant check for agent_name in manifest_data
-            # if agent_name in manifest_data:
-            #     # get the agent_id from the manifest
-            #     agent_id = json.loads(manifest)[agent_name]["agent_id"]
-            #     print(f"Agent name: {agent_name}")
-            #     print(f"Agent id: {agent_id}")
-            #     # create a new thread with the agent_id
-            #     thread = AzureAIAgentThread(client=client)
-            #     return agent_id
-
 
         prompt = f"Please choose an agent from the following manifest:\n{manifest}\n\nWhich agent would you like to use in order that meet the following input text: {input_text}. You should choose the agent based on the input text closeness with the utterances depicted on the manifest.\n\n Return just the information on the agent_id field." 
         generic_agent = await client.agents.get_agent("asst_5jWDJeBffbsPO7VGUiuXYuY3")
