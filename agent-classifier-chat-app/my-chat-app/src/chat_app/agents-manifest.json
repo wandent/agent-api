@@ -1,0 +1,57 @@
+{"agents":
+    [
+        {"agent_id": "asst_imwZWQebLCDze69a7s8A1G65", 
+        "agent-name": "prompt-engineer",
+        "agent-description": "This agent is designed to help you create and refine prompts for AI models. It can assist you in generating effective prompts, improving existing ones, and providing suggestions for better results.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "I'd like to create a new prompt"
+        },
+        {
+            "utterance": "Help me to craft a prompt."
+        },
+        {
+            "utterance": "Help me to resolve a complex problem with a prompt"
+        }
+            ]  
+
+        },
+        {"agent_id": "asst_LjxpI1jOelbbnFQvU7vxpXbk",
+        "agent-name": "researcher",
+        "agent-description": "This agent is designed to help the user to research AI papers and summarize them.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "I'd like to know about the following topic in AI:"
+        },
+        {
+            "utterance": "Help me researching AI Papers about the following subject: "
+        },
+        {
+            "utterance": "Help me to summarize the ai paper related to the folowing subject: "
+        }
+        ] 
+    
+        }, 
+        {"agent_id": "asst_rYEZZ8EHgoNtsjdZWXS9sBKb",
+        "agent-name": "weather",
+        "agent-description": "This agent is designed to help the user to ask for the weather forecast on a specific region or set of regions.",
+        "agent-version": "0.0.1",
+        "utterances": [
+        {
+            "utterance": "how is the weather in the following region: "
+        },
+        {
+            "utterance": "what is the weather forecast in the region: "
+        },
+        {
+            "utterance":  "tell me about the weather in the following region: "
+        }
+        ] 
+    
+        } 
+       
+    ]
+        
+}
