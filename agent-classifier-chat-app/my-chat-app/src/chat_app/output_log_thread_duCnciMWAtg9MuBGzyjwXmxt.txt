@@ -1,0 +1,18 @@
+What is the weather forecast in New York today
+The current weather in New York is as follows:
+
+- **Condition:** Sunny
+- **Temperature:** 17°C
+- **Wind Speed:** 22 km/h (from the northeast)
+- **Humidity:** Not specified (but it indicates clear skies)
+
+Here's a brief forecast for today:
+- **Morning:** Sunny, 17°C
+- **Noon:** Partly Cloudy, 22°C
+- **Evening:** Partly Cloudy, 24°C
+- **Night:** Clear, 20°C
+
+No precipitation is expected throughout the day (0.0 mm). 
+
+If you need any more information or another location, feel free to ask!
+exit

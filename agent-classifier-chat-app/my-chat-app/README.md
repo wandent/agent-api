@@ -58,6 +58,18 @@ python src/chat_app/main.py
 
 Follow the prompts in the terminal to interact with the chat application. Type 'exit' to end the conversation.
 
+## Features
+- Leverages agents created on Azure AI Foundy
+   - Researcher
+   - Prompt Engineer
+   - Weather
+   - Generic
+- Dynamically classifies the agent using the prompt comparing with the agent defintions and utterances on the agents-manifest.json
+> Future improvement would be to query the agents based on the keywords to shorten the list, and the resulting json be used as context for the LLM to classify
+- Classifies quickly the agent when the agent name is mentioned directly on the prompt preceded of @, like @weather, @researcher or @prompt-engineer
+- Chat interface can engage with a given agent, if the user wants to change the subject of the conversation they can type "new chat" to start over
+- To exit the application, type exit
+
 ## Testing
 
 To run the tests, use the following command:
